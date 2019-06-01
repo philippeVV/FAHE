@@ -1,8 +1,3 @@
-" Vim fyletype plugin to allow binary format analysis and hex editing. (fanhex)
-" Last change: In development
-" Maintainer: Philippe Van Velzen
-" License: Ain't sure yet
-
 
 " The function have for goal to retrieve information regarding the formating
 " outputed by xxd.
@@ -98,6 +93,7 @@ function! s:BufOptions()
   setlocal bufhidden=hide " hide thhe buffer instead of unloading it
   setlocal buftype=nofile " buffer attach to no file (won't try to save it)
   setlocal noswapfile " don't create swap file for this buffer
+  setlocal nobin " Should not be necessary
 
   " window appearence
   setlocal foldcolumn=0 " no fold colunm (local for window)
@@ -119,15 +115,6 @@ function! s:BufOptions()
 endfunction
 "=============================
 
-" Save cpo and set it for line continuation
-let s:save_cpo = &cpo
-set cpo&vim
-
-if exists("g:loaded_fanhex")
-  finish
-endif
-let g:loaded_fanhex = 1
-
 call s:GetXxdInfo()
 
 augroup xxd
@@ -137,5 +124,3 @@ augroup END
 
 call s:SetDebugWin()
 
-let &cpo = s:save_cpo
-unlet s:save_cpo
