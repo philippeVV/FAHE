@@ -42,7 +42,7 @@ function! s:GetMatch()
       let l:spaceHexa = (l:column - s:hexaStart) / 5
       let l:match = float2nr(floor((l:column - s:hexaStart - l:spaceHexa) / 2.0))
       let l:match = l:match + s:asciiStart
-      call HighlightMatch(l:match, l:line)
+      call s:HighlightMatch(l:match, l:line)
       echo "hexa" 
     endif
   elseif l:column > s:asciiStart && l:column < s:asciiEnd 
@@ -68,7 +68,7 @@ endfunction
 function! s:SetDebugWin()
   let l:xxdWinId = win_getid()
 
-  call CreateWindow()
+  call s:CreateWindow()
   let l:debugWinId = win_getid()
   let l:debugBufName = bufname(l:debugWinId)
   call setbufline(l:debugBufName, 1, "DEBUG")
@@ -137,5 +137,5 @@ let g:loaded_fanhex = 1
 
 call SetDebugWin()
 
-let &cpo = s.save_cpo
-unlet s.save_cpo
+let &cpo = s:save_cpo
+unlet s:save_cpo
