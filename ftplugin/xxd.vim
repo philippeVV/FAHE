@@ -128,14 +128,14 @@ if exists("g:loaded_fanhex")
 endif
 let g:loaded_fanhex = 1
 
-"call GetXxdInfo()
+call s:GetXxdInfo()
 
-" augroup xxd
-"   au!
-"   au cursorMoved,cursorMovedI * call GetMatch()
-" augroup END
+augroup xxd
+  au!
+  au cursorMoved,cursorMovedI * call s:GetMatch()
+augroup END
 
-call SetDebugWin()
+call s:SetDebugWin()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
