@@ -1,0 +1,6 @@
+{ 
+  "type": "JPEG",
+  "name": "Joint Photogaphic Experts Group",
+  "typeInfo": "Incomming",
+  "magicNumber": "ff d8 ff"
+}

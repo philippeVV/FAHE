@@ -1,0 +1,44 @@
+{
+  "type": "PE",
+  "name": "Portable executable",
+  {
+    "section": "header",
+    "Description": "technical details about the executable",
+    {
+      "section": "DOS header",
+      "Description": "show it's a binary"
+    },
+    {
+      "section": "PE header",
+      "Description": "shows it's a modern binary"
+    },
+    {
+      "section": "optional header",
+      "Description": "excutable information"
+    },
+    {
+      "section": "data directories",
+      "Description": "pointers to extra section"
+    },
+    {
+      "section": "sections table",
+      "Description": "defines how files is loaded in memory"
+    }
+  },
+  {
+    "section": "sections",
+    "Description": "content of the executable",
+    {
+      "section": "code",
+      "Description": "what is executed"
+    },
+    {
+      "section": "imports",
+      "Description": "link between the executable and libraries"
+    },
+    {
+      "section": "data",
+      "Description": "information used by the code"
+    }
+  }
+}
