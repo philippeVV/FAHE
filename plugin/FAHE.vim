@@ -64,7 +64,9 @@ if has("autocmd")
 
     " convert to hex on startup for binary files automatically
     au BufReadPost *
-          \ if &binary | Hexmode | endif
+          \ if &binary |
+          \   echom "Warning!" . &binary |
+          \ endif
 
     " When the text is freed, the next time the buffer is made active it will
     " re-read the text and thus not match the correct mode, we will need to

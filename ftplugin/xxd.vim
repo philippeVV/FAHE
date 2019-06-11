@@ -60,67 +60,25 @@ function! s:HighlightMatch(col, line)
 endfunction
 
 "=============================
-function! s:SetDebugWin()
-  let l:xxdWinId = win_getid()
-
-  call s:CreateWindow()
-  let l:debugWinId = win_getid()
-  let l:debugBufName = bufname(l:debugWinId)
-  call setbufline(l:debugBufName, 1, "DEBUG")
-  call setbufline(l:debugBufName, 2, "Debug window Id: " . l:debugWinId)
-  call setbufline(l:debugBufName, 3, "Debug Buffer name: " . l:debugBufName)
-  call setbufline(l:debugBufName, 4, "Address start: " . s:addressStart)
-  call setbufline(l:debugBufName, 5, "Address end: " . s:addressEnd)
-  call setbufline(l:debugBufName, 6, "Ascii start: " . s:asciiStart)
-  call setbufline(l:debugBufName, 7, "Ascii end: " . s:asciiEnd)
-  call setbufline(l:debugBufName, 8, "Hexa start: " . s:hexaStart)
-  call setbufline(l:debugBufName, 9, "Hexa end: " . s:hexaEnd)
-  
+function! s:callDebug()
+  let l:debugDict = {}
+  let debugDict["Adress start: "] = s:addressStart
+  let debugDict["Address end: "] = s:addressEnd
+  let debugDict["Ascii start: "] = s:asciiStart
+  let debugDict["Ascii end: "] = s:asciiEnd
+  let debugDict["Hexa start: "] = s:hexaStart
+  let debugDict["Hexa end: "] = s:hexaEnd
+  call debug#SetDebugWin(l:debugDict)
 endfunction
-
-"=============================
-function! s:CreateWindow()
-  let l:splitLocation = "botright "
-  let l:splitSize = "50"
-
-  silent! exec l:splitLocation . " vertical " . l:splitSize . " new"
-  
-  call s:BufOptions()
-endfunction
-
-function! s:BufOptions()
-  "Buffer option
-  setlocal bufhidden=hide " hide thhe buffer instead of unloading it
-  setlocal buftype=nofile " buffer attach to no file (won't try to save it)
-  setlocal noswapfile " don't create swap file for this buffer
-  setlocal nobin " Should not be necessary
-
-  " window appearence
-  setlocal foldcolumn=0 " no fold colunm (local for window)
-  setlocal foldmethod=manual " determine the fold method
-  setlocal nobuflisted " Buffer won't be listed in buffer list
-  setlocal nofoldenable " Fold close by default
-  setlocal nolist " Hmm unsure, but we don't want it
-  setlocal nospell " No spell checking
-  setlocal nowrap " No line wrap
-  setlocal nonu " No line number
-  if v:version >= 703 " Why the version check ?
-    setlocal nornu " No relative line number
-  endif
-
-  iabc <buffer> " Remove insert mode abbreviations
-  
-  setlocal cursorline " Highlight the line of the cursor
-  setlocal winfixwidth " Keep the width of the window when tab are open or closed
-endfunction
-"=============================
 
 call s:GetXxdInfo()
 
-augroup xxd
+augroup s:xxd
   au!
   au cursorMoved,cursorMovedI * call s:GetMatch()
 augroup END
 
-call s:SetDebugWin()
+call s:callDebug()
+
+let b:undo_ftplugin = "au! s:xxd | aug! s:xxd"
 
