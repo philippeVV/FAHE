@@ -21,22 +21,22 @@ vnoremap <C-H> :<C-U>Hexmode<CR>
 " toggle hex mode
 command -bar Hexmode call ToggleHex()
 
-" ToggleHex(). Save old buffer variable. 
+" ToggleHex(). Save old buffer variable. --- {{{
 function! ToggleHex()
   " save old buffer parameter
   let l:modified = &mod
-  let l:oldreadonly = &readonly | let &readonly = 0
-  let l:oldmodifiable = &modifiable | let &modifiable = 1
+  let l:oldreadonly = &readonly | let &readonly=0
+  let l:oldmodifiable = &modifiable | let &modifiable=1
 
   if !exists("b:editHex") || !b:editHex
-    let b:oldbin=&bin | let &bin=1
-    silent :edit 
-    let b:editHex=1
+    let b:oldbin = &bin | let &bin=1
+    silent :edit
+    let b:editHex = 1
     %!xxd
-    let b:oldft=&ft | let &ft="xxd"
+    let b:oldft = &ft | let &ft="xxd"
   else
-    &bin = b:oldbin
-    let b:editHex=0
+    let &bin=b:oldbin
+    let b:editHex = 0
     %!xxd -r
     let &ft=b:oldft
   endif
@@ -46,7 +46,9 @@ function! ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction 
+" }}}
 
+" autocmd for hexmode management from '' --- {{{
 "autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
   " vim -b : edit binary using xxd-format!
@@ -96,6 +98,7 @@ if has("autocmd")
           \ endif
   augroup END
 endif
+" }}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
