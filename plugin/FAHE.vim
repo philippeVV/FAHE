@@ -21,29 +21,27 @@ vnoremap <C-H> :<C-U>Hexmode<CR>
 " toggle hex mode
 command -bar Hexmode call ToggleHex()
 
-" helper function to toggle hex mode
+" ToggleHex(). Save old buffer variable. 
 function! ToggleHex()
-  let l:modified=&mod
-  let l:oldreadonly=&readonly
-  let &readonly=0
-  let l:oldmodifiable=&modifiable
-  let &modifiable=1
+  " save old buffer parameter
+  let l:modified = &mod
+  let l:oldreadonly = &readonly | let &readonly = 0
+  let l:oldmodifiable = &modifiable | let &modifiable = 1
+
   if !exists("b:editHex") || !b:editHex
-    let b:oldft=&ft
-    let b:oldbin=&bin
-    setlocal binary 
-    silent :e 
+    let b:oldbin=&bin | let &bin=1
+    silent :edit 
     let b:editHex=1
     %!xxd
-    let &ft="xxd"
+    let b:oldft=&ft | let &ft="xxd"
   else
-    if !b:oldbin
-      setlocal nobinary
-    endif
+    &bin = b:oldbin
     let b:editHex=0
     %!xxd -r
     let &ft=b:oldft
   endif
+
+  " Restore old buffer parameter
   let &mod=l:modified
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
