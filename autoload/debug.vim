@@ -1,12 +1,13 @@
-
+" debug#DebugAutoCommand() --- {{{
 function! debug#DebugAutoCommand()
-  augrou- s:debug
+  augroup s:debug
     au!
-    au FileType * call setbufline(l:debugBufName, 13, "FileType: " . &ft)
+    au FileType * echom "FileType changed: " . &ft
   augroup END
-
 endfunction
+" }}}
 
+" debug#SetDebugWin(debugDict) --- {{{
 function! debug#SetDebugWin(debugDict)
   let l:xxdWinId = win_getid()
 
@@ -29,3 +30,4 @@ function! debug#SetDebugWin(debugDict)
     let l:loopCounter += 1
   endfor
 endfunction
+" }}}
