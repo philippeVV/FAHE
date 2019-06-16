@@ -1,3 +1,8 @@
+" Debug information for hexmode.
+" Last change: In development
+" Maintainer: Philippe Van Velzen
+" License: Vim license
+
 " debug#DebugAutoCommand() --- {{{
 function! debug#DebugAutoCommand()
   augroup s:debug

@@ -1,3 +1,9 @@
+" Window manipulation
+" Last change: In development
+" Maintainer: Philippe Van Velzen
+" License: Vim license
+
+" window#BufOptions --- {{{
 function! window#BufOptions()
   "Buffer option
   setlocal bufhidden=hide " hide thhe buffer instead of unloading it
@@ -23,7 +29,9 @@ function! window#BufOptions()
   setlocal cursorline " Highlight the line of the cursor
   setlocal winfixwidth " Keep the width of the window when tab are open or closed
 endfunction
+" }}}
 
+" window#CreateWindow() --- {{{
 function! window#CreateWindow()
   let l:splitLocation = "botright "
   let l:splitSize = "50"
@@ -33,3 +41,4 @@ function! window#CreateWindow()
   
   call window#BufOptions()
 endfunction
+" }}}

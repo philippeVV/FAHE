@@ -1,3 +1,8 @@
+" Manipulation related to the filetype xxd
+" Last change: In development
+" Maintainer: Philippe Van Velzen
+" License: Vim license
+
 " GetXxdInfo() --- {{{
 " The function have for goal to retrieve information regarding the formating
 " outputed by xxd.

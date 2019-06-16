@@ -3,6 +3,7 @@
 " Maintainer: Philippe Van Velzen
 " License: Vim license
 
+" The code to toggle Hexmode come from: 
 " https://vim.fandom.com/wiki/Improved_hex_editing
 
 let s:save_cpo = &cpo
