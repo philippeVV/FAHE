@@ -38,6 +38,9 @@ function! ToggleHex()
     let &bin=b:oldbin
     let b:editHex = 0
     %!xxd -r
+    "ugly! should have been in xxd.vim, but doesn't work if it 
+    "isn't declare in the file that make the ft change.
+    let b:undo_ftplugin = "au! s:xxd | aug! s:xxd" 
     let &ft=b:oldft
   endif
 

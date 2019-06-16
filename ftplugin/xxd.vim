@@ -82,11 +82,9 @@ endfunction
 call s:GetXxdInfo()
 
 augroup s:xxd
-  au!
-  au cursorMoved,cursorMovedI * call s:GetMatch()
+  au! * <buffer> 
+  au cursorMoved,cursorMovedI <buffer> call s:GetMatch()
 augroup END
 
-call s:callDebug()
-
-let b:undo_ftplugin = "au! s:xxd | aug! s:xxd"
+"call s:callDebug()
 
